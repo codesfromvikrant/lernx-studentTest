@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+  --bg-primary: #015958;
+  --bg-secondary: #D8FFF3;
+}
+
+.option-input {
+  font-size: 0.8rem;
+  border: 2px #e5e7eb solid;
+  border-radius: 2px;
+  width: 100%;
+  padding: 0.6rem;
+}
