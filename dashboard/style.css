@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #015958;
+  --slight-primary: #0159582f;
+  --secondary: #DAFFF3;
+  --blackish: #053535;
+  --redish: #E6624F;
+  --blueish: #EBFFFD;
+  --greyish: #EBFFF9;
+}
+
+body {
+  font-family: 'Hind', sans-serif;
+}
+
+
+.Montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+/* Font Size */
+.fs-7 {
+  font-size: 0.8rem;
+}
+
+/* Width */
+.w-8 {
+  width: 8rem;
+}
+
+.w-20 {
+  width: 20rem;
+}
+
+/* height */
+.h-8 {
+  height: 8rem;
+}
+
+.max-content {
+  width: max-content;
+}
+
+.nav-hoverEffect:hover {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 400;
+  border-radius: 0.4rem;
+}
+
+.nav-active {
+  border-top: 0.2rem solid var(--redish);
+  background-color: white;
+}
+
+option {
+  padding: 1rem;
+  background-color: var(--secondary);
+}
+
+#menu-icon {
+  display: none;
+  color: var(--primary);
+  position: fixed;
+  top: 1rem;
+  right: 0.9rem;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .sidenav {
+    display: none;
+  }
+
+  #menu-icon {
+    display: block;
+  }
+}
+
+.menu-bar {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  animation-name: animateNav;
+  animation-duration: 700ms;
+  animation-timing-function: ease-in-out;
+  z-index: 99;
+}
+
+@keyframes animateNav {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}

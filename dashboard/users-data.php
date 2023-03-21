@@ -1,12 +1,13 @@
 <?php
 
-require_once '../vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 
 $client = new MongoDB\Client("mongodb://localhost:27017");
 
-$collection = $client->testques->tests;
+$collection = $client->testques->users;
 
 $results = $collection->find();
+
 $data = [];
 
 foreach ($results as $result) {

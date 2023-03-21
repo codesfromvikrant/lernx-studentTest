@@ -17,17 +17,30 @@
 </head>
 
 <body class="bg-[#D8FFF3] relative">
-  <video id="video-preview" class="w-48 h-40 absolute top-0 right-0 z-50"></video>
+  <div id="pop-up">
+    <p>You will lose your test data on changing or closing the tab!</p>
+    <div class="close">Close</div>
+  </div>
+
+  <video id="video-preview" class="w-48 h-40 fixed top-0 right-1/2 translate-x-1/2 z-50"></video>
 
   <section id="container"
-    class="max-w-6xl my-10 p-8 rounded shadow bg-white mx-auto flex justify-start items-start gap-4">
-    <form id="form">
+    class="max-w-6xl min-h-[90vh] my-24 lg:p-8 p-3 rounded shadow bg-white mx-auto flex justify-between items-start md:flex-row flex-col">
+
+    <form id="form" class="md:w-2/3">
+      <div class="logo">
+        <img src="./images/nav-logo.png" class="w-28" alt="">
+        <h3 id="test-title" class="text-2xl text-gray-700 font-extrabold mt-3 mb-1"></h3>
+        <h4 id="test-description" class="text-sm">* Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
+          voluptatum,
+          repudiandae
+          doloremque Esse
+          dignissimos, neque natus accusantium dolores earum ut, aperiam assumenda, rerum obcaecati veritatis nemo sint?
+        </h4>
+      </div>
       <div id="test-info" class="">
-        <div class="logo">
-          <img src="./images/nav-logo.png" class="w-28" alt="">
-        </div>
-        <h3 class="text-2xl text-gray-700 font-extrabold my-3">BCA Mid Semester Test Exam.</h3>
         <article class="text-gray-700">
+          <h4 class="font-semibold">Marks Per Question : <span id="marksPerQues"></span> </h4>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt corrupti illum veritatis ab libero,
             nesciunt ducimus dolorem praesentium adipisci repellat consectetur rem. Mollitia, pariatur voluptatibus.
             Unde
@@ -44,48 +57,44 @@
           <p class="">* Exercitationem dolorum possimus temporibus.</p>
         </article>
 
-        <h4 class="mt-6 text-gray-700 font-semibold">Total Time for Test : 2 Hours 30 minutes</h4>
+        <h4 class="mt-6 text-gray-700 font-semibold">Total Time for Test : <span id="hours"></span> Hours <span
+            id="minutes"></span> minutes</h4>
 
         <button id="start-test"
           class="bg-[#015958] mt-2 text-white font-semibold shadow-md cursor-pointer py-2 px-10 rounded">Start
           Test</button>
       </div>
 
-      <h3 class="text-2xl text-gray-700 font-extrabold my-3">BCA Mid Semester Test Exam.</h3>
-      <h4 class="text-sm mt-4">* Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste voluptatum,
-        repudiandae
-        doloremque Esse
-        dignissimos, neque natus accusantium dolores earum ut, aperiam assumenda, rerum obcaecati veritatis nemo sint?
-      </h4>
       <div id="submit-alert" class="text-xl text-red-500 font-semibold"></div>
-      <div id="form-container">
-
+      <div id="form-container" class="">
       </div>
 
-      <div id="test-btn" class="hidden justify-between items-center ">
+      <div id="test-btn"
+        class="hidden sm:justify-between justify-start sm:items-center items-start gap-3 sm:flex-row flex-col">
         <input id="submit-test" type="submit"
           class="bg-[#015958] mt-2 text-white font-semibold shadow-md cursor-pointer py-2 px-10 rounded"
           value="Submit test">
-        <button id="next-question" class="bg-gray-300 hover:bg-gray-400 transition-all py-2 px-4 text-sm rounded">Next
+        <button id="next-question"
+          class="bg-gray-300 hover:bg-gray-400 font-semibold transition-all py-2 px-4 text-sm rounded">Next
           question</button>
       </div>
     </form>
 
-    <div id="test-detail" class="w-[40rem] hidden p-4 bg-gray-100 rounded">
+    <div id="test-detail" class="md:w-1/3  hidden p-4 md:ml-4 md:mt-0 mt-8 h-full bg-white shadow-lg rounded">
       <div id="timer"
-        class="flex justify-start items-end text-base bg-gray-300 p-2 rounded mb-3 font-bold text-gray-800">
+        class="flex justify-start items-end text-base bg-gray-100 p-2 rounded mb-3 font-bold text-gray-800">
       </div>
       <h4 class="text-lg font-bold text-gray-700 mb-2">Questions Attempted</h4>
       <div class="">
         <div class="text-xs flex justify-start items-center gap-2">
-          <div class="w-4 h-4 bg-red-500 rounded"></div> Red for Question attempted.
+          <div class="w-4 h-4 bg-red-500 rounded-full"></div> Red for Question attempted.
         </div>
 
         <div class="text-xs flex justify-start items-center gap-2 mt-2">
-          <div class="w-4 h-4 bg-gray-600 rounded"></div> gray for Question not attempted.
+          <div class="w-4 h-4 bg-white border-2 border-gray-300 rounded-full"></div> white for Question not attempted.
         </div>
       </div>
-      <div id="total-questions" class="grid grid-cols-7 my-3"></div>
+      <div id="total-questions" class="grid grid-cols-7 bg-gray-100 gap-3 p-3 rounded-md mt-6"></div>
     </div>
 
     <div id="score" class="text-3xl text-gray-700 font-bold text-center"></div>

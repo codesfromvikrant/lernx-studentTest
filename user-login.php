@@ -18,21 +18,22 @@
 
 <body>
 
-  <div class="container max-w-xl mx-auto bg-gray-100 border-[#015958] border-t-4 my-12 p-16 shadow-md rounded-md">
-    <h3 class="text-xl uppercase mb-4 font-extrabold text-gray-600">Sign Up For Test!</h3>
+  <div
+    class="container max-w-xl mx-auto bg-gray-100 border-[#015958] border-t-4 my-12 sm:p-16 p-8 shadow-md rounded-md">
+    <h3 class="text-xl uppercase mb-4 font-extrabold text-gray-600">Log In For Test!</h3>
 
     <form id="signupform" action="" post="post" class="flex justify-start items-start gap-3 flex-col">
 
-      <div class="flex justify-start items-start w-full flex-col gap-1">
+      <!--<div class="flex justify-start items-start w-full flex-col gap-1">
         <label for="username">Username* :</label>
         <input type="text" name="username" class="w-full p-3 rounded-md text-sm" placeholder="Enter Your Full Name"
           required>
-      </div>
+      </div>-->
 
       <div class="flex justify-start items-start w-full flex-col gap-1">
         <label for="email">Email* :</label>
-        <input type="text" name="email" class="w-full p-3 rounded-md text-sm" placeholder="Enter Your Valid Email"
-          required>
+        <input type="text" name="email" id="email" class="w-full p-3 rounded-md text-sm"
+          placeholder="Enter Your Valid Email" required>
       </div>
 
       <div class="flex justify-start items-start w-full flex-col gap-1">
@@ -41,12 +42,18 @@
           placeholder="Enter your Password" required>
       </div>
 
-      <div class="flex justify-start items-start w-full flex-col gap-1">
+      <div class="">
+        <label for="test" class="font-semibold text-gray-800">Choose The Test Subject :</label><br />
+        <select name="test" id="test" class="input bg-gray-200 p-2 rounded-md w-full text-sm font-semibold">
+        </select>
+      </div>
+
+      <!--<div class="flex justify-start items-start w-full flex-col gap-1">
         <label for="confirm-password">Confirm Password* :</label>
         <input type="password" name="confirm-password" id="confirm-password" class="w-full p-3 rounded-md text-sm"
           placeholder="Enter your Password" required>
         <p id="password-error" class="text-sm text-red-600 font-semibold"></p>
-      </div>
+      </div>-->
 
       <input type="submit" class="bg-[#015958] mt-6 text-white font-medium shadow-md cursor-pointer py-2 px-10 rounded"
         value="Submit">
@@ -58,31 +65,44 @@
     const inputs = document.querySelectorAll('input');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirm-password');
+    const email = document.getElementById('email');
+    const test = document.getElementById('test');
+
+    fetch('./question-bank/database.php')
+      .then(response => response.json())
+      .then(data => {
+        //console.log(data)
+        data.forEach((el) => {
+          //console.log(el._id.$oid);
+          const option = `<option value="${el._id.$oid}">${el.testSubject}</option>`;
+          test.insertAdjacentHTML("beforeend", option);
+        });
+
+        const selectedOption = test.options[test.selectedIndex];
+        const selectedValue = selectedOption.value;
+        sessionStorage.setItem('testID', selectedValue);
+      });
+
+    test.addEventListener('change', function (e) {
+      e.preventDefault();
+      const selectedOption = test.options[test.selectedIndex];
+      const selectedValue = selectedOption.value;
+      sessionStorage.setItem('testID', selectedValue);
+    });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-
-      if (password.value != confirmPassword.value) {
-        document.getElementById('password-error').innerText = 'Password does not match! Confirm the password again.'
-      } else {
-        fetch('user.php', {
-          body: new FormData(form),
-          method: 'post'
-        })
-          .then(response => {
-            // changing url location to test page 
-            window.location.href = 'studenttest.html';
-
-            // changing value of all input field to ''
-            for (let i = 0; i < inputs.length; i++) {
-              inputs[i].value = '';
-              console.log(inputs[i])
+      fetch('user.php')
+        .then((response) => response.json())
+        .then(data => {
+          data.forEach(el => {
+            if (el.email == email.value && el.password == password.value) {
+              // changing url location to test page 
+              sessionStorage.setItem('username', el.username);
+              window.location.href = 'studenttest.html';
             }
           })
-          .catch(error => {
-            console.error(error);
-          });
-      }
+        })
     })
   </script>
 
